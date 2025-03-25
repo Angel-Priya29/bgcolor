@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Chat UI</title>
+    <style>
+        /* Default Chat Background */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e5ddd5; /* WhatsApp default background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .chat-container {
+            width: 350px;
+            height: 500px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background-color: #075e54;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: inherit; /* Changes dynamically */
+        }
+
+        .chat-message {
+            background-color: #dcf8c6;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            max-width: 70%;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            background-color: #f8f9fa;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .chat-input button {
+            padding: 8px 12px;
+            margin-left: 5px;
+            border: none;
+            background-color: #25d366;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Background Change Button */
+        .color-picker-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <div class="chat-header">WhatsApp Chat</div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-message">Hello! 👋</div>
+            <div class="chat-message">How are you?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="messageInput" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+        <div class="color-picker-container">
+            <label for="bgColor">Change Background: </label>
+            <input type="color" id="bgColor" onchange="changeChatBackground()">
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            let messageInput = document.getElementById("messageInput");
+            let chatBody = document.getElementById("chatBody");
+
+            if (messageInput.value.trim() !== "") {
+                let newMessage = document.createElement("div");
+                newMessage.classList.add("chat-message");
+                newMessage.textContent = messageInput.value;
+                chatBody.appendChild(newMessage);
+                messageInput.value = "";
+                chatBody.scrollTop = chatBody.scrollHeight; // Auto-scroll
+            }
+        }
+
+        function changeChatBackground() {
+            let colorPicker = document.getElementById("bgColor");
+            let chatBody = document.getElementById("chatBody");
+            chatBody.style.backgroundColor = colorPicker.value;
+        }
+    </script>
+
+</body>
+</html>
